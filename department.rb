@@ -2,7 +2,6 @@ require './employee'
 
 class Department < ActiveRecord::Base
   def add_employee(new_employee)
-    @staff << new_employee
   end
 
   def department_salary
