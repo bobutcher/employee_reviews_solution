@@ -1,13 +1,15 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'active_record'
 
-class Employee
-  attr_reader :name, :email, :phone, :salary, :review, :satisfactory
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'db.sqlite3'
+)
 
-  def initialize(name: nil, email: nil, phone: nil, salary: nil)
-    @name = name
-    @email = email
-    @phone = phone
-    @salary = salary
-  end
+
+
+class Employee < ActiveRecord::Base
 
   def add_employee_review(review)
     @review = review
@@ -44,5 +46,8 @@ class Employee
 
   def raise_by_amount(raise_amount)
     @salary += raise_amount
+  end
+  def satisfactory
+    true
   end
 end
