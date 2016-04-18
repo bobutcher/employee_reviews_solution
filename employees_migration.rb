@@ -1,4 +1,7 @@
-class EmployeesMigration < ActiveRecord::Migration
+require 'active_record'
+require_relative 'database'
+
+class EmployeesAndDeparmentMigration < ActiveRecord::Migration
   def change
     create_table :employees do |t|
       t.integer :department_id
@@ -7,10 +10,19 @@ class EmployeesMigration < ActiveRecord::Migration
       t.string :phone
       t.integer :salary
       t.text :review
+      t.boolean :satisfactory
     end
     create_table :departments do |t|
       t.string :name
+      t.string :staff
+      t.text :review
     end
   end
 end
-# EmployeesMigration.migrate(:up)
+
+begin
+  EmployeesAndDeparmentMigration.migrate(:down)
+rescue
+
+end
+EmployeesAndDeparmentMigration.migrate(:up)
